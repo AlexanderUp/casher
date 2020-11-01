@@ -1,0 +1,17 @@
+*.pyc
+*.profile
+*.db
+*.sqlite3
+*.txt
+*.log
+*.json
+*.bash
+*config.py
+__pycache__/*
+myvenv/*
+static/*
+test_folder/*
+output/*
+.DS_Store
+/*.jpg
+/out*.*
