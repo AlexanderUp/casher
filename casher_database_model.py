@@ -14,23 +14,13 @@ from sqlalchemy import DateTime
 from datetime import datetime
 
 
-GROUPS = {
-            '1':'Products',
-            '2':'Gas',
-            '3':'Wildberries',
-            '4':'Soft',
-            '5':'Medicine',
-            '6':'Service',
-         }
-
-
 metadata = MetaData()
 
 
 expenses = Table('expenses', metadata,
                   Column('id', Integer, primary_key=True),
-                  Column('gpoup_id', Integer, nullable=False),
-                  Column('article_id', Integer, nullable=False),
+                  Column('date', DateTime, nullable=False),
+                  Column('group_id', Integer, nullable=False),
                   Column('price', Float, nullable=False),
                   Column('memo', String),
                   Column('created', DateTime, default=datetime.now),
@@ -50,17 +40,14 @@ groups = Table('groups', metadata,
 
 class Expense():
 
-    def __init__(self, group_id, name_id, price, memo=None):
+    def __init__(self, date, group_id, price, memo=None):
+        self.date = date
         self.group_id = group_id
-        self.name_id = name_id
         self.price = price
         self.memo = memo
 
     def __repr__(self):
-        return f'<Expence ({self.group_id}, {self.name_id}, {self.price})>'
-
-    def __str__(self):
-        return f'<Expence ({self.group_id}, {self.name_id}, {self.price})>'
+        return f'<Expence ({self.group_id}, {self.price})>'
 
 
 class Article():
@@ -71,9 +58,6 @@ class Article():
     def __repr__(self):
         return f'<Article ({self.article_name})>'
 
-    def __str__(self):
-        return f'<Article ({self.article_name})>'
-
 
 class Group():
 
@@ -81,7 +65,4 @@ class Group():
         self.group_name = group_name
 
     def __repr__(self):
-        return f'<Expense Group ({self.group_name})>'
-
-    def __str__(self):
         return f'<Expense Group ({self.group_name})>'
